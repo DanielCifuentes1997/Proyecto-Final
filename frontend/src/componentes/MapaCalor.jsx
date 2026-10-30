@@ -1,15 +1,15 @@
 import { useState } from 'react'
-
-const COLORES_GRUPO = ['#23497A', '#6B93BD', '#B08A3E', '#7E8C9B', '#3F7C8C', '#9C6B5E']
+import { paleta } from './paleta.js'
 
 export function colorGrupo(grupo) {
-  return COLORES_GRUPO[grupo % COLORES_GRUPO.length]
+  const g = paleta().grupos
+  return g[grupo % g.length]
 }
 
 // mezcla lineal entre el papel y el azul según el valor (0 a 1)
 function colorCelda(valor) {
-  const a = [245, 247, 250]
-  const b = [35, 73, 122]
+  const a = paleta().celdaClara
+  const b = paleta().celdaOscura
   const c = []
   for (let k = 0; k < 3; k++) c.push(Math.round(a[k] + (b[k] - a[k]) * valor))
   return 'rgb(' + c.join(',') + ')'
@@ -60,8 +60,8 @@ export default function MapaCalor({ mapa, titulos, seleccion, alElegirPar }) {
                   y={margen + i * celda}
                   width={celda - 1}
                   height={celda - 1}
-                  fill={i === j ? '#1B2B44' : colorCelda(Math.min(valor / maximo, 1))}
-                  stroke={elegida ? '#E8B931' : 'none'}
+                  fill={i === j ? paleta().diagonal : colorCelda(Math.min(valor / maximo, 1))}
+                  stroke={elegida ? paleta().resalte : 'none'}
                   strokeWidth={elegida ? 2 : 0}
                   opacity={activa ? 1 : 0.55}
                   className={i !== j ? 'cursor-pointer' : ''}

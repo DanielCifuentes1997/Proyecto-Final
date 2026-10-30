@@ -26,12 +26,6 @@ function enviarJson(ruta, datos) {
 export const api = {
   corpus: () => pedir('/api/corpus'),
   mapa: () => pedir('/api/corpus/mapa'),
-  subirPdf: (archivo) => {
-    const formulario = new FormData()
-    formulario.append('archivo', archivo)
-    return pedir('/api/corpus', { method: 'POST', body: formulario })
-  },
-  eliminar: (id) => pedir('/api/corpus/' + id, { method: 'DELETE' }),
   comparar: (ids) => enviarJson('/api/similitud', { ids }),
   clustering: () => pedir('/api/clustering'),
   buscar: (patron) => enviarJson('/api/busqueda', { patron }),

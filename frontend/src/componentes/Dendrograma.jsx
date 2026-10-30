@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
-
-const COLORES = ['#23497A', '#2F7D5B', '#B08A3E', '#6B93BD', '#9C6B5E', '#3F7C8C', '#7E5A9B', '#5E6B7A']
+import { paleta } from './paleta.js'
 
 export function colorDeGrupo(k) {
-  return COLORES[k % COLORES.length]
+  const g = paleta().grupos
+  return g[k % g.length]
 }
 
 // Igual que cortar_en_grupos en Python: aplico las primeras n-k fusiones
@@ -93,14 +93,14 @@ export default function Dendrograma({ criterio, etiquetas, k }) {
           ))}
           {corte !== null && (
             <g>
-              <line x1={margen.izq} x2={ancho - margen.der} y1={y(corte)} y2={y(corte)} stroke="#E8B931" strokeWidth={1.5} strokeDasharray="5 4" />
+              <line x1={margen.izq} x2={ancho - margen.der} y1={y(corte)} y2={y(corte)} stroke={paleta().resalte} strokeWidth={1.5} strokeDasharray="5 4" />
               <text x={ancho - margen.der} y={y(corte) - 5} textAnchor="end" className="fill-[#8a6a12] text-[11px]">
                 corte en {k} grupos
               </text>
             </g>
           )}
           {lineas.map((l) => {
-            const color = l.grupo === null ? '#8C99A8' : colorDeGrupo(l.grupo)
+            const color = l.grupo === null ? paleta().ramaSinGrupo : colorDeGrupo(l.grupo)
             const resaltada = foco && foco.tipo === 'fusion' && foco.idx === l.idx
             return (
               <g key={l.id} onMouseEnter={() => setFoco({ tipo: 'fusion', idx: l.idx, f: l.f })} className="cursor-default">

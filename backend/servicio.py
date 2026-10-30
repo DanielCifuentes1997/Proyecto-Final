@@ -23,13 +23,12 @@ from busqueda.rabin_karp import preparar_patron, buscar_rabin_karp, BASE, PRIMO
 
 CORPUS = os.path.join(RAIZ, "datos", "corpus.json")
 EMBEDDINGS = os.path.join(RAIZ, "datos", "embeddings.json")
-CARPETA_PDF = os.path.join(RAIZ, "datos", "articulos")
 GRUPOS_MAPA = 4
 LARGO_FRAGMENTO = 14
 
 
 class Servicio:
-    """Guarda el corpus en memoria y recalcula todo cuando cambia."""
+    """Carga el corpus una vez y deja calculado todo lo que usa la página."""
 
     def __init__(self):
         self.cargar()
@@ -42,12 +41,6 @@ class Servicio:
             with open(EMBEDDINGS, encoding="utf-8") as f:
                 self.embeddings = json.load(f)
         self.recalcular()
-
-    def guardar(self):
-        with open(CORPUS, "w", encoding="utf-8") as f:
-            json.dump(self.corpus, f, indent=2, ensure_ascii=False)
-        with open(EMBEDDINGS, "w", encoding="utf-8") as f:
-            json.dump(self.embeddings, f)
 
     def recalcular(self):
         self.por_id = {}
@@ -98,7 +91,6 @@ class Servicio:
             articulos.append({
                 "id": art["id"], "titulo": art["titulo"], "autores": art["autores"],
                 "abstract": art["abstract"], "palabras": len(tokens), "caracteres": len(art["abstract"]),
-                "tiene_ia": str(art["id"]) in self.embeddings.get("minilm", {}),
             })
         return {"articulos": articulos, "total_palabras": palabras, "vocabulario": len(vocabulario),
                 "autores": len(autores)}
@@ -118,43 +110,6 @@ class Servicio:
                 fila.append(1.0 if i == j else round(1 - self.D[i][j], 4))
             similitud.append(fila)
         return {"ids": ids, "similitud": similitud, "grupos": grupos}
-
-    def siguiente_id(self):
-        mayor = 0
-        for art in self.corpus:
-            if art["id"] > mayor:
-                mayor = art["id"]
-        return mayor + 1
-
-    def agregar(self, articulo, vector_minilm=None, vector_glove=None):
-        self.corpus.append(articulo)
-        if vector_minilm is not None:
-            self.embeddings["minilm"][str(articulo["id"])] = vector_minilm
-        if vector_glove is not None:
-            self.embeddings["glove"][str(articulo["id"])] = vector_glove
-        self.guardar()
-        self.recalcular()
-
-    def eliminar(self, id_art):
-        nuevo = []
-        archivo = None
-        for art in self.corpus:
-            if art["id"] == id_art:
-                archivo = art["archivo"]
-            else:
-                nuevo.append(art)
-        if archivo is None:
-            return False
-        self.corpus = nuevo
-        for modelo in ["minilm", "glove"]:
-            if str(id_art) in self.embeddings.get(modelo, {}):
-                del self.embeddings[modelo][str(id_art)]
-        ruta = os.path.join(CARPETA_PDF, archivo)
-        if os.path.exists(ruta):
-            os.remove(ruta)
-        self.guardar()
-        self.recalcular()
-        return True
 
     # ---------- requerimiento 1 ----------
     def comparar(self, ids):

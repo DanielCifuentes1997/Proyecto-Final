@@ -3,6 +3,7 @@ import { LoaderCircle, Search } from 'lucide-react'
 import Encabezado from '../componentes/Encabezado.jsx'
 import Desplegable, { Formula, Codigo } from '../componentes/Desplegable.jsx'
 import { api } from '../api.js'
+import Muestra from '../componentes/Muestra.jsx'
 
 const SUGERENCIAS = ['learning', 'assessment', 'higher education', 'generative artificial intelligence', 'sess']
 
@@ -307,8 +308,11 @@ export default function Busqueda() {
               </p>
               <Desplegable titulo="Boyer-Moore: alineaciones y saltos" resumen={r.recorrido.boyer_moore.length + ' alineaciones'} abierto>
                 <p className="mb-4 max-w-3xl text-sm">
-                  El patrón se compara de derecha a izquierda. En azul claro, letras que ya coincidieron; en rojo, el carácter
-                  que falla; en verde, la coincidencia completa. Cada fila es una alineación y a la derecha está el salto.
+                  El patrón se compara de derecha a izquierda.
+                  <Muestra clase="bg-azul-claro border border-linea" />letras que ya coincidieron,
+                  <Muestra clase="bg-alerta/40" />el carácter que falla y
+                  <Muestra clase="bg-ia-suave border border-ia" />la coincidencia completa. Cada fila es una alineación y a
+                  la derecha está el salto.
                 </p>
                 <RecorridoBoyerMoore recorrido={r.recorrido} patron={r.patron} />
                 <Formula>salto = j − última(carácter malo), mínimo 1</Formula>
@@ -327,8 +331,9 @@ export default function Busqueda() {
               >
                 <p className="mb-3 max-w-3xl text-sm">
                   Cada ventana de {r.m} caracteres tiene su hash, calculado desde la anterior en O(1) con rolling hash. Si el
-                  hash es igual al del patrón ({r.tablas.hash}) se revisa letra por letra: verde es coincidencia real, rojo
-                  es colisión.
+                  hash es igual al del patrón ({r.tablas.hash}) se revisa letra por letra:
+                  <Muestra clase="bg-ia-suave border border-ia" />coincidencia real,
+                  <Muestra clase="bg-alerta/10 border border-alerta" />colisión.
                 </p>
                 <div className="flex flex-wrap gap-1 font-mono text-xs">
                   {r.recorrido.rabin_karp.map((p) => (

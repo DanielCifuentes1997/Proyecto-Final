@@ -9,17 +9,25 @@
 @import "@fontsource/ibm-plex-mono/500.css";
 
 @theme {
-  --color-tinta: #1B2B44;
-  --color-tinta-suave: #4A5B73;
-  --color-azul: #23497A;
-  --color-azul-claro: #DCE6F2;
-  --color-papel: #F5F7FA;
-  --color-linea: #D5DCE5;
-  --color-marcador: #E8B931;
-  --color-marcador-suave: #FBEFC7;
-  --color-ia: #2F7D5B;
-  --color-ia-suave: #DDEFE6;
-  --color-alerta: #A33A2B;
+  --color-tinta: #0B2E3B;
+  --color-tinta-suave: #4E6670;
+  --color-azul: #0F5E6E;
+  --color-azul-claro: #D3EAEE;
+  --color-papel: #F2F5F6;
+  --color-linea: #CFDCDF;
+  --color-marcador: #F2B134;
+  --color-marcador-suave: #FCEBC4;
+  --color-ia: #7A4FA3;
+  --color-ia-suave: #EEE6F6;
+  --color-alerta: #C8475B;
+
+  --color-lateral: #0B2E3B;
+  --color-lateral-borde: #1C4553;
+  --color-lateral-titulo: #FFFFFF;
+  --color-lateral-texto: #A9C2C9;
+  --color-lateral-hover: #123B49;
+  --color-lateral-activo: #16485A;
+  --color-lateral-activo-texto: #FFFFFF;
 
   --font-serif: "Newsreader", Georgia, serif;
   --font-sans: "IBM Plex Sans", system-ui, sans-serif;

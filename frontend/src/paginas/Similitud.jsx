@@ -4,6 +4,7 @@ import { LoaderCircle, Search, X } from 'lucide-react'
 import Encabezado from '../componentes/Encabezado.jsx'
 import Desplegable, { Formula, Codigo } from '../componentes/Desplegable.jsx'
 import TextoResaltado from '../componentes/TextoResaltado.jsx'
+import Muestra from '../componentes/Muestra.jsx'
 import { useCorpus } from '../componentes/CorpusContexto.jsx'
 import { api } from '../api.js'
 
@@ -77,7 +78,7 @@ function Barras({ resultados }) {
         </div>
       ))}
       <p className="pt-1 text-xs text-tinta-suave">
-        Azul: algoritmos clásicos. Verde: modelos de IA. La última columna es el tiempo de cálculo.
+        <Muestra clase="bg-azul" />algoritmos clásicos <Muestra clase="bg-ia" />modelos de IA. La última columna es el tiempo de cálculo.
       </p>
     </div>
   )
@@ -329,7 +330,7 @@ export default function Similitud() {
           <p className="text-sm text-tinta-suave">
             {seleccion.length < 2
               ? 'Marque al menos dos artículos.'
-              : seleccion.length + ' artículos: se compararán ' + (seleccion.length * (seleccion.length - 1)) / 2 + ' pares.'}
+              : seleccion.length + ' artículos: ' + ((seleccion.length * (seleccion.length - 1)) / 2 === 1 ? 'se comparará 1 par.' : 'se compararán ' + (seleccion.length * (seleccion.length - 1)) / 2 + ' pares.')}
           </p>
           <div className="flex flex-wrap gap-2">
             {seleccion.map((id) => (

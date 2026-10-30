@@ -14,43 +14,47 @@ export default function Layout() {
   const { corpus } = useCorpus()
   return (
     <div className="min-h-screen lg:flex">
-      <aside className="border-b border-linea bg-white lg:fixed lg:inset-y-0 lg:w-64 lg:border-b-0 lg:border-r">
+      <aside className="border-b border-lateral-borde bg-lateral lg:fixed lg:inset-y-0 lg:w-64 lg:border-b-0 lg:border-r">
         <div className="flex h-full flex-col px-5 py-6">
           <div className="mb-8 flex items-center gap-3">
-            <img src="/favicon.svg" alt="" className="h-9 w-9" />
+            <img src="/favicon.svg" alt="" className="h-9 w-9 rounded-md ring-1 ring-lateral-borde" />
             <div>
-              <p className="font-serif text-xl leading-tight">BiblioAnálisis</p>
-              <p className="text-xs text-tinta-suave">Análisis de Algoritmos 2026-2</p>
+              <p className="font-serif text-xl leading-tight text-lateral-titulo">BiblioAnálisis</p>
+              <p className="text-xs text-lateral-texto">Análisis de Algoritmos 2026-2</p>
             </div>
           </div>
           <nav className="flex gap-1 overflow-x-auto lg:flex-col">
             {SECCIONES.map(({ ruta, nombre, icono, fin }) => {
               const Icono = icono
               return (
-              <NavLink
-                key={ruta}
-                to={ruta}
-                end={fin}
-                className={({ isActive }) =>
-                  'flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ' +
-                  (isActive ? 'bg-azul-claro font-medium text-azul' : 'text-tinta-suave hover:bg-papel hover:text-tinta')
-                }
-              >
-                <Icono size={18} strokeWidth={1.8} aria-hidden="true" />
-                {nombre}
-              </NavLink>
+                <NavLink
+                  key={ruta}
+                  to={ruta}
+                  end={fin}
+                  className={({ isActive }) =>
+                    'flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ' +
+                    (isActive
+                      ? 'bg-lateral-activo font-medium text-lateral-activo-texto'
+                      : 'text-lateral-texto hover:bg-lateral-hover hover:text-lateral-titulo')
+                  }
+                >
+                  <Icono size={18} strokeWidth={1.8} aria-hidden="true" />
+                  {nombre}
+                </NavLink>
               )
             })}
           </nav>
-          <div className="mt-auto hidden border-t border-linea pt-4 text-xs leading-relaxed text-tinta-suave lg:block">
-            {corpus ? (
-              <p>
-                Trabajando con <span className="font-medium text-tinta">{corpus.articulos.length} artículos</span>.
-                Todo se recalcula al subir o eliminar un PDF.
-              </p>
-            ) : (
-              <p>Conectando con el servidor…</p>
-            )}
+          <div className="mt-auto hidden border-t border-lateral-borde pt-4 lg:block">
+            <p className="text-xs leading-relaxed text-lateral-texto">
+              {corpus ? (
+                <>
+                  Corpus de <span className="font-medium text-lateral-titulo">{corpus.articulos.length} artículos</span>{' '}
+                  extraídos de los PDF del curso.
+                </>
+              ) : (
+                'Conectando con el servidor…'
+              )}
+            </p>
           </div>
         </div>
       </aside>
