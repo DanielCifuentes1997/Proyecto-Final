@@ -241,6 +241,12 @@ function DetallePar({ par, articulos }) {
                     <td className={'pr-4 ' + (f.producto > 0 ? 'text-azul' : 'text-tinta-suave')}>{f4(f.producto)}</td>
                   </tr>
                 ))}
+                <tr className="border-t-2 border-tinta/30 font-medium">
+                  <td colSpan={7} className="py-2 pr-4 font-sans text-tinta">
+                    Suma = producto punto A·B
+                  </td>
+                  <td className="pr-4 text-azul">{f4(detalle.producto_punto)}</td>
+                </tr>
               </tbody>
             </table>
           </div>

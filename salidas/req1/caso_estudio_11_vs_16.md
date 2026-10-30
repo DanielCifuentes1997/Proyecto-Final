@@ -61,6 +61,7 @@ Palabras comunes (las únicas que aportan al producto punto):
 | ai | 2 | 7 | 18 | 0.0458 | 0.0915 | 0.3203 | 0.0293 |
 | rethink | 1 | 1 | 2 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
 | provide | 1 | 1 | 10 | 0.3010 | 0.3010 | 0.3010 | 0.0906 |
+| **Suma (producto punto)** |  |  |  |  |  |  | **10.9763** |
 
 Producto punto A·B = 10.9763
 |A| = raíz(94.2507) = 9.7083   (78 palabras con peso)
@@ -90,9 +91,9 @@ distancia euclidiana = 1.1918
 
 | Algoritmo | Similitud | Tiempo |
 |---|---|---|
-| Levenshtein | 0.2864 | 1.2163 s |
+| Levenshtein | 0.2864 | 1.6749 s |
 | Jaccard | 0.0870 | 0.0012 s |
-| Dice | 0.1600 | 0.0011 s |
-| TF-IDF + coseno | 0.1000 | 0.0012 s |
+| Dice | 0.1600 | 0.0012 s |
+| TF-IDF + coseno | 0.1000 | 0.0096 s |
 | MiniLM (IA) | 0.7356 | 0.0001 s |
 | GloVe (IA) | 0.9355 | 0.0000 s |

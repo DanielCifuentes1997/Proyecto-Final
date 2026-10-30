@@ -76,6 +76,7 @@ def seccion_tfidf(comp, a, b):
             filas.append([p, tfa[p], tfb[p], modelo.df[p], "%.4f" % modelo.idf[p],
                           "%.4f" % va[p], "%.4f" % vb[p], "%.4f" % (va[p] * vb[p])])
     pp = producto_punto(va, vb)
+    filas.append(["**Suma (producto punto)**", "", "", "", "", "", "", "**%.4f**" % pp])
     ma = magnitud(va)
     mb = magnitud(vb)
     cos = pp / (ma * mb)
