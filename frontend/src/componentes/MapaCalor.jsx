@@ -27,13 +27,15 @@ export default function MapaCalor({ mapa, titulos, seleccion, alElegirPar }) {
   if (maximo === 0) maximo = 1
   const celda = n <= 20 ? 22 : n <= 40 ? 13 : 8
   const margen = 34
+  const lado = margen + n * celda + 4
 
+  // el bloque mide lo mismo que el mapa para que el texto de abajo no cambie el diseño
   return (
-    <div>
+    <div style={{ width: lado, maxWidth: '100%' }}>
       <div className="overflow-x-auto">
         <svg
-          width={margen + n * celda + 4}
-          height={margen + n * celda + 4}
+          width={lado}
+          height={lado}
           role="img"
           aria-label="Mapa de calor de similitud TF-IDF entre los artículos"
         >
@@ -73,16 +75,21 @@ export default function MapaCalor({ mapa, titulos, seleccion, alElegirPar }) {
           )}
         </svg>
       </div>
-      <div className="mt-3 min-h-[3.5rem] text-sm text-tinta-suave" aria-live="polite">
+      <div className="mt-3 h-[5.5rem] overflow-hidden text-sm text-tinta-suave" aria-live="polite">
         {foco && foco.i !== foco.j ? (
-          <p>
-            <span className="font-medium text-tinta">
-              Artículo {mapa.ids[foco.i]} y artículo {mapa.ids[foco.j]}
-            </span>
-            : similitud TF-IDF de <span className="font-mono text-tinta">{foco.valor.toFixed(4)}</span>.
-            <br />
-            <span className="line-clamp-1">{titulos[mapa.ids[foco.i]]}</span>
-          </p>
+          <div>
+            <p>
+              <span className="font-medium text-tinta">
+                Artículo {mapa.ids[foco.i]} y artículo {mapa.ids[foco.j]}
+              </span>
+              : similitud TF-IDF de <span className="font-mono text-tinta">{foco.valor.toFixed(4)}</span>.
+            </p>
+            {[mapa.ids[foco.i], mapa.ids[foco.j]].map((id) => (
+              <p key={id} className="truncate" title={titulos[id]}>
+                <span className="font-mono text-xs">{id}</span> {titulos[id]}
+              </p>
+            ))}
+          </div>
         ) : (
           <p>Pase el cursor sobre una casilla para ver el par. Haga clic para compararlo con los 6 algoritmos.</p>
         )}
