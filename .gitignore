@@ -1,0 +1,16 @@
+# Archivos personales que no van al repositorio
+privado/
+
+# Los PDF de los artículos se quedan solo en el equipo (derechos de autor).
+# En el repositorio va datos/corpus.json, que es lo que usa la aplicación.
+datos/articulos/*.pdf
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Sistema
+.DS_Store
+Thumbs.db
