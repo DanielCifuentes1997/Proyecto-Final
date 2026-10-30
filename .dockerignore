@@ -1,0 +1,10 @@
+venv/
+.venv/
+**/__pycache__/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+datos/articulos/
+privado/
+salidas/
+.git/

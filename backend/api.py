@@ -2,6 +2,7 @@ import os
 import sys
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -12,6 +13,7 @@ app = FastAPI(title="BiblioAnálisis API")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 servicio = Servicio()
+PAGINA = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend", "dist")
 
 
 class PeticionComparar(BaseModel):
@@ -20,6 +22,12 @@ class PeticionComparar(BaseModel):
 
 class PeticionBuscar(BaseModel):
     patron: str
+
+
+@app.get("/api/salud")
+def salud():
+    """Respuesta liviana para el monitor que mantiene despierto el servidor."""
+    return {"estado": "ok", "articulos": len(servicio.corpus)}
 
 
 @app.get("/api/corpus")
@@ -52,3 +60,15 @@ def busqueda(peticion: PeticionBuscar):
     if peticion.patron.strip() == "":
         raise HTTPException(400, "Escriba un patrón para buscar.")
     return servicio.buscar(peticion.patron)
+
+
+@app.get("/{ruta:path}")
+def pagina(ruta: str):
+    """Entrega la página web ya construida; las rutas de React (/similitud, /busqueda...) usan index.html."""
+    archivo = os.path.normpath(os.path.join(PAGINA, ruta))
+    if ruta != "" and archivo.startswith(PAGINA) and os.path.isfile(archivo):
+        return FileResponse(archivo)
+    indice = os.path.join(PAGINA, "index.html")
+    if not os.path.isfile(indice):
+        raise HTTPException(404, "La página no está construida. Ejecute npm run build en la carpeta frontend.")
+    return FileResponse(indice)
