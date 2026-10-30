@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@import "@fontsource/newsreader/400.css";
+@import "@fontsource/newsreader/500.css";
+@import "@fontsource/newsreader/600.css";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@theme {
+  --color-tinta: #1B2B44;
+  --color-tinta-suave: #4A5B73;
+  --color-azul: #23497A;
+  --color-azul-claro: #DCE6F2;
+  --color-papel: #F5F7FA;
+  --color-linea: #D5DCE5;
+  --color-marcador: #E8B931;
+  --color-marcador-suave: #FBEFC7;
+  --color-ia: #2F7D5B;
+  --color-ia-suave: #DDEFE6;
+  --color-alerta: #A33A2B;
+
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-tinta);
+    background: var(--color-papel);
+  }
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-azul);
+    outline-offset: 2px;
+  }
+}
+
+mark.marcador {
+  background: var(--color-marcador-suave);
+  border-bottom: 2px solid var(--color-marcador);
+  color: inherit;
+  padding: 0 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

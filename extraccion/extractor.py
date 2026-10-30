@@ -154,6 +154,21 @@ def extraer_titulo(documento, nombre):
     return titulo
 
 
+def extraer_articulo(ruta, numero):
+    """Saca título, autores y abstract de un solo PDF."""
+    nombre = os.path.basename(ruta)
+    documento = pymupdf.open(ruta)
+    articulo = {
+        "id": numero,
+        "archivo": nombre,
+        "titulo": extraer_titulo(documento, nombre),
+        "autores": extraer_autores(documento, numero),
+        "abstract": extraer_abstract(bloques_de_texto(documento)),
+    }
+    documento.close()
+    return articulo
+
+
 def extraer_corpus():
     corpus = []
     archivos = os.listdir(CARPETA_PDF)
@@ -161,15 +176,8 @@ def extraer_corpus():
     for nombre in archivos:
         if not nombre.lower().endswith(".pdf"):
             continue
-        documento = pymupdf.open(os.path.join(CARPETA_PDF, nombre))
         numero = int(nombre.split(".")[0])
-        corpus.append({
-            "id": numero,
-            "archivo": nombre,
-            "titulo": extraer_titulo(documento, nombre),
-            "autores": extraer_autores(documento, numero),
-            "abstract": extraer_abstract(bloques_de_texto(documento)),
-        })
+        corpus.append(extraer_articulo(os.path.join(CARPETA_PDF, nombre), numero))
     return corpus
 
 

@@ -1,3 +1,5 @@
 pymupdf
 matplotlib
-streamlit
+fastapi
+uvicorn
+python-multipart

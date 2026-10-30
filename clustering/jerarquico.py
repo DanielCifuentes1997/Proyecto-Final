@@ -53,3 +53,24 @@ def clustering_jerarquico(D, criterio):
         activos[siguiente_id] = nuevo
         siguiente_id = siguiente_id + 1
     return fusiones
+
+
+def cortar_en_grupos(fusiones, n, k):
+    """Aplico solo las primeras n-k fusiones y quedan k grupos. Devuelve el grupo de cada documento."""
+    grupos = {}
+    for i in range(n):
+        grupos[i] = [i]
+    siguiente_id = n
+    for paso in range(n - k):
+        a, b, distancia, nuevo = fusiones[paso]
+        del grupos[a]
+        del grupos[b]
+        grupos[siguiente_id] = nuevo
+        siguiente_id = siguiente_id + 1
+    etiqueta = [0] * n
+    numero = 0
+    for clave in grupos:
+        for doc in grupos[clave]:
+            etiqueta[doc] = numero
+        numero = numero + 1
+    return etiqueta
