@@ -1,0 +1,22 @@
+patron,m,algoritmo,preprocesamiento_ms,busqueda_ms
+ai,2,KMP,0.000490,5.6754
+ai,2,Boyer-Moore,0.000532,8.3698
+ai,2,Rabin-Karp,0.001449,14.4567
+data,4,KMP,0.000850,4.6928
+data,4,Boyer-Moore,0.001126,3.7068
+data,4,Rabin-Karp,0.001882,12.9691
+learning,8,KMP,0.001477,4.9452
+learning,8,Boyer-Moore,0.001260,2.1683
+learning,8,Rabin-Karp,0.003598,12.8734
+assessment,10,KMP,0.001758,5.2689
+assessment,10,Boyer-Moore,0.001120,1.9029
+assessment,10,Rabin-Karp,0.004182,12.6814
+higher education,16,KMP,0.004202,4.4331
+higher education,16,Boyer-Moore,0.001777,1.5334
+higher education,16,Rabin-Karp,0.005938,13.7742
+artificial intelligence,23,KMP,0.004576,4.8170
+artificial intelligence,23,Boyer-Moore,0.002176,1.0696
+artificial intelligence,23,Rabin-Karp,0.005446,12.9968
+generative artificial intelligence,34,KMP,0.007109,4.5930
+generative artificial intelligence,34,Boyer-Moore,0.002723,0.8773
+generative artificial intelligence,34,Rabin-Karp,0.007697,12.6922
