@@ -1,17 +1,3 @@
-"""
-Preprocesamiento del texto de los abstracts.
-
-Convierte un abstract en una lista de palabras limpias (tokens):
-  1. pasar a minúsculas
-  2. quitar signos (todo lo que no sea letra se vuelve separador)
-  3. separar en palabras
-  4. quitar las stopwords (palabras que no aportan significado)
-
-Se hace letra por letra con ciclos, sin funciones de librerías,
-para que el comportamiento sea transparente y se pueda analizar su T(n).
-"""
-
-# Palabras vacías del inglés (tomadas del seguimiento)
 STOPWORDS = {
     "a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are",
     "as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but", "by",
@@ -30,24 +16,18 @@ STOPWORDS = {
 
 
 def a_minuscula(caracter):
-    """Si el carácter es una letra mayúscula (A-Z) devuelve su minúscula; si no, lo deja igual."""
+    # la minúscula está 32 posiciones después de la mayúscula
     if "A" <= caracter <= "Z":
-        # en la tabla de caracteres, cada minúscula está 32 posiciones después de su mayúscula
         return chr(ord(caracter) + 32)
     return caracter
 
 
 def es_letra(caracter):
-    """True si el carácter es una letra minúscula de la a a la z."""
     return "a" <= caracter <= "z"
 
 
 def tokenizar(texto):
-    """
-    Pasos 1, 2 y 3: recorre el texto letra por letra.
-    Va armando la palabra actual; cuando encuentra algo que no es letra
-    (espacio, coma, punto, paréntesis, guion, número...), guarda la palabra y empieza otra.
-    """
+    """Recorre el texto letra por letra y lo separa en palabras en minúscula."""
     palabras = []
     actual = ""
     for i in range(len(texto)):
@@ -58,13 +38,12 @@ def tokenizar(texto):
             if actual != "":
                 palabras.append(actual)
             actual = ""
-    if actual != "":  # la última palabra, si el texto no termina en signo
+    if actual != "":
         palabras.append(actual)
     return palabras
 
 
 def quitar_stopwords(palabras):
-    """Paso 4: deja solo las palabras que no son stopwords y tienen 2 letras o más."""
     limpias = []
     for i in range(len(palabras)):
         p = palabras[i]
@@ -74,12 +53,10 @@ def quitar_stopwords(palabras):
 
 
 def preprocesar(texto):
-    """Abstract original -> lista de palabras limpias."""
     return quitar_stopwords(tokenizar(texto))
 
 
 if __name__ == "__main__":
     frase = ("Since artificial intelligence (AI) is finding its way into more and more areas of "
              "everyday life, improving the AI skills of non-experts is important")
-    print("Tokens:", tokenizar(frase))
-    print("Limpias:", preprocesar(frase))
+    print(preprocesar(frase))

@@ -1,14 +1,3 @@
-"""
-Coeficiente de Dice (Sørensen–Dice).
-
-Igual que Jaccard compara el vocabulario de dos textos, pero divide de otra forma:
-
-    D(A, B) = 2 · |A ∩ B| / (|A| + |B|)
-
-Las palabras comunes se cuentan dos veces arriba (una por cada texto)
-y abajo se suman los tamaños de los dos conjuntos.
-Reutiliza las funciones de conjuntos de jaccard.py.
-"""
 import os
 import sys
 
@@ -18,6 +7,7 @@ from similitud.jaccard import conjunto, tamano_interseccion
 
 
 def similitud_dice(texto_a, texto_b):
+    """2 * comunes / (|A| + |B|)"""
     A = conjunto(preprocesar(texto_a))
     B = conjunto(preprocesar(texto_b))
     total = len(A) + len(B)

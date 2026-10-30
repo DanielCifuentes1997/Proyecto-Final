@@ -1,19 +1,3 @@
-"""
-Coeficiente de Jaccard.
-
-Compara el VOCABULARIO de dos textos: qué palabras distintas comparten.
-
-    J(A, B) = |A ∩ B| / |A ∪ B|
-
-    A ∩ B (intersección) = palabras que están en los dos textos
-    A ∪ B (unión)        = palabras que están en al menos uno de los textos
-    |X|                  = cantidad de palabras distintas de X
-
-Como la unión cuenta dos veces las palabras comunes:  |A ∪ B| = |A| + |B| - |A ∩ B|
-
-Los conjuntos se guardan en un diccionario (palabra -> True):
-buscar si una palabra está en el diccionario toma tiempo constante.
-"""
 import os
 import sys
 
@@ -22,7 +6,7 @@ from preprocesamiento.texto import preprocesar
 
 
 def conjunto(palabras):
-    """Lista de palabras -> diccionario con cada palabra UNA sola vez (sin repetidas)."""
+    """Deja cada palabra una sola vez."""
     c = {}
     for i in range(len(palabras)):
         c[palabras[i]] = True
@@ -53,9 +37,4 @@ if __name__ == "__main__":
          "becomes increasingly applicable for learning purposes")
     b = ("Artificial intelligence (AI), as an emerging technology, has been widely used in STEM "
          "education to promote the educational assessment")
-    A = conjunto(preprocesar(a))
-    B = conjunto(preprocesar(b))
-    print("A:", list(A), len(A))
-    print("B:", list(B), len(B))
-    print("Comunes:", [p for p in A if p in B])
     print("Jaccard:", round(similitud_jaccard(a, b), 4))
