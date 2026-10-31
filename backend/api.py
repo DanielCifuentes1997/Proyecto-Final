@@ -24,7 +24,7 @@ class PeticionBuscar(BaseModel):
     patron: str
 
 
-@app.get("/api/salud")
+@app.api_route("/api/salud", methods=["GET", "HEAD"])
 def salud():
     """Respuesta liviana para el monitor que mantiene despierto el servidor."""
     return {"estado": "ok", "articulos": len(servicio.corpus)}
