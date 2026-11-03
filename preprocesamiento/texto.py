@@ -9,9 +9,9 @@ STOPWORDS = {
     "such", "than", "that", "the", "their", "theirs", "them", "themselves", "then", "there", "these",
     "they", "this", "those", "through", "to", "too", "under", "until", "up", "very", "was", "we",
     "were", "what", "when", "where", "which", "while", "who", "whom", "why", "with", "would", "you",
-    "your", "yours", "yourself", "yourselves", "also", "using", "used", "paper", "study", "based",
-    "results", "research", "aims", "may", "well", "one", "two", "three", "first", "second", "show",
-    "shows", "found", "however", "within", "across", "et", "al",
+    "your", "yours", "yourself", "yourselves",
+    # conectores, números para enumerar y las marcas de cita "et al."
+    "also", "may", "well", "however", "within", "across", "one", "two", "three", "first", "second", "et", "al",
 }
 
 
