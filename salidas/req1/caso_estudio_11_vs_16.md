@@ -33,13 +33,13 @@ Tamaño de la matriz con los abstracts completos: 1380 x 1089 = 1502820 casillas
 
 ## 2 y 3. Jaccard y Dice
 
-|A| (palabras distintas del art. 11) = 78
+|A| (palabras distintas del art. 11) = 80
 |B| (palabras distintas del art. 16) = 72
 A ∩ B = 12 palabras: generative, artificial, intelligence, challenges, education, assessment, retrieved, students, integrity, ai, rethink, provide
-|A ∪ B| = 78 + 72 - 12 = 138
+|A ∪ B| = 80 + 72 - 12 = 140
 
-Jaccard = 12 / 138 = 0.0870
-Dice = 2·12 / (78 + 72) = 24 / 150 = 0.1600
+Jaccard = 12 / 140 = 0.0857
+Dice = 2·12 / (80 + 72) = 24 / 152 = 0.1579
 
 ## 4. TF-IDF + coseno
 
@@ -64,10 +64,10 @@ Palabras comunes (las únicas que aportan al producto punto):
 | **Suma (producto punto)** |  |  |  |  |  |  | **10.9763** |
 
 Producto punto A·B = 10.9763
-|A| = raíz(94.2507) = 9.7083   (78 palabras con peso)
+|A| = raíz(95.7156) = 9.7834   (80 palabras con peso)
 |B| = raíz(127.8083) = 11.3052   (72 palabras con peso)
-cos(θ) = 10.9763 / (9.7083 · 11.3052) = 0.1000
-θ = 84.26 grados
+cos(θ) = 10.9763 / (9.7834 · 11.3052) = 0.0992
+θ = 84.30 grados
 
 ## 5 y 6. Modelos de IA (embeddings)
 
@@ -81,19 +81,19 @@ distancia euclidiana = 0.7272
 
 ### glove-wiki-gigaword-100 (promedio de vectores de palabras, 100 dimensiones)
 Dimensión del vector: 100
-Primeros 5 valores A: -0.0549, 0.2585, -0.0634, 0.2285, 0.0170
+Primeros 5 valores A: -0.0663, 0.2636, -0.0608, 0.2230, 0.0113
 Primeros 5 valores B: -0.0854, 0.2649, 0.1965, 0.1604, -0.0326
-A·B = 7.6330   |A| = 3.1756   |B| = 2.5694
-coseno = 7.6330 / (3.1756 · 2.5694) = 0.9355
-distancia euclidiana = 1.1918
+A·B = 7.7040   |A| = 3.1963   |B| = 2.5694
+coseno = 7.7040 / (3.1963 · 2.5694) = 0.9381
+distancia euclidiana = 1.1875
 
 ## Resumen
 
 | Algoritmo | Similitud | Tiempo |
 |---|---|---|
-| Levenshtein | 0.2864 | 1.6749 s |
-| Jaccard | 0.0870 | 0.0012 s |
-| Dice | 0.1600 | 0.0012 s |
-| TF-IDF + coseno | 0.1000 | 0.0096 s |
+| Levenshtein | 0.2864 | 1.6103 s |
+| Jaccard | 0.0857 | 0.0017 s |
+| Dice | 0.1579 | 0.0019 s |
+| TF-IDF + coseno | 0.0992 | 0.0026 s |
 | MiniLM (IA) | 0.7356 | 0.0001 s |
-| GloVe (IA) | 0.9355 | 0.0000 s |
+| GloVe (IA) | 0.9381 | 0.0000 s |
