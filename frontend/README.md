@@ -49,3 +49,9 @@ Eso genera la carpeta `dist/`, que el servidor entrega como página en la aplica
 ## Colores
 
 La paleta es sobria a propósito y cada color tiene un significado fijo: el petróleo es para los algoritmos clásicos y los botones, el morado solo para los resultados de los modelos de IA, y el ámbar solo para resaltar coincidencias.
+
+## Cómo se hizo
+
+La página se construyó con ayuda de un asistente de inteligencia artificial (Claude), como está declarado en el protocolo de uso de IA del documento del proyecto.
+
+El proyecto se centra en los algoritmos y su análisis, que están en las carpetas de Python (`similitud/`, `clustering/`, `busqueda/`). La página no implementa ningún algoritmo: solo pide los resultados al servidor y los muestra. Por eso se hizo de forma rápida y llegó en un solo commit ("Aplicación web del proyecto"); después se ajustó en commits más pequeños (colores, mapa de calor y la tabla de TF-IDF).
